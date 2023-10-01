@@ -11,7 +11,7 @@
 /* LAYOUT
 /*******************************************/
 html{
-  font-family:'Roboto', sans-serif;
+  font-family:'poppins', sans-serif;
   background-color: #1c1f26;
   color: whitesmoke;
   font-size: 62.5%;
@@ -55,8 +55,13 @@ nav{
 }
 #links li{
   background-color: #1175a0;
-  padding: 0.5rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 5px;
+}
+#links li:hover{
+  opacity: 80%;
+  -webkit-animation: pulse 0.5s;
+  transition: .5s ease;
 }
 nav a{
   color: white;
@@ -67,8 +72,12 @@ nav a{
   align-self: center;
   justify-self: right;
   background-color: #1175a0;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 5px;
+}
+.button:hover{
+  opacity: 80%;
+  -webkit-animation: pulse 0.5s;
 }
 .panel{
   height: 50rem;
@@ -81,13 +90,14 @@ nav a{
   display:flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(rgba(25, 25, 25, 0.3), rgba(25, 25, 25, 1)),
+  background: linear-gradient(rgba(25, 25, 25, 0.5), rgba(25, 25, 25, 1)),
   url(background.jpg) no-repeat;
   background-size: 100% 100% ;
+  height:80vh;
 }
 .slider p,.slider h3{
-width:50%;
-margin:7rem 0 0 0;
+  width:50%;
+  margin:2rem 0;
 }
 .slider button{
   display: block;
@@ -107,8 +117,9 @@ margin:7rem 0 0 0;
 .skills{
   display: grid;
   background-color: #2d343d;
-  grid-template-columns: 2fr 2rem 1fr 1fr;
+  grid-template-columns: 50% 2rem 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
+  justify-content: center;
 }
 .skill img{
   height: 4rem;
@@ -117,9 +128,13 @@ margin:7rem 0 0 0;
 .skill{
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+.skill:hover{
+  -webkit-animation: pulse 0.5s;
 }
 .declaration{
-  grid-area: 1/1/span4/2;
+  grid-area: 1/1/5/2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -138,20 +153,27 @@ margin:7rem 0 0 0;
   width: 7rem;
 }
 .HTML{
-  grid-area: 2/3/3/4;
-}
-.CSS{
   grid-area: 2/4/3/5;
 }
+.CSS{
+  grid-area: 2/5/3/6;
+}
 .Javascript{
-  grid-area: 3/3/4/4;
+  grid-area: 3/4/4/5;
 }
 .wordpress{
-  grid-area:4/5/3/4;
+  grid-area:4/5/3/6;
 }
+.git{
+  grid-area:2/6/3/7
+}
+.github{
+  grid-area:3/6/4/7
+}
+
 /* portfolio */
 .portfolio{
-  height: 100rem;
+  height: 100vh;
   background-color: #2d343d;
 }
 .portfolio>span{
@@ -169,17 +191,17 @@ margin:7rem 0 0 0;
 
 .container{
   display: grid;
-  grid-template:5% auto 5%/ 5% 1fr 1fr 1fr 5%;
+  grid-template:5% auto 2rem 5%/ 5% 1fr 1fr 1fr 5%;
   height: 100%;
   padding:2rem;
 }
 .page{
   display: flex;
   justify-content: center;
-  align-items: end;
+  /* align-items: end; */
   width: 100%;
   height: 100%;
-  margin:0 2rem;
+  /* margin:0 2rem; */
   flex-grow: 1;
   padding: 1rem;
   border-radius:20px;
@@ -189,16 +211,81 @@ margin:7rem 0 0 0;
   background-size: 100% 100%;
   grid-area: 2/2/3/3;
 }
+.forex-Law{
+  grid-area: 3/2/4/3;
+}
 .empty-2{
   grid-area:2/3/3/4;
 }
+.Empty-2{
+  grid-area: 3/3/4/4;
+}
 .empty-3{
   grid-area:2/4/3/5;
+}
+.Empty-3{
+  grid-area: 3/4/4/5;
+}
+.Page-label{
+  position: relative;
+  top:5px;
+  justify-self: center;
+}
+
+/* footer */
+
+footer.contact.panel{
+  height: 20vh;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2d343d;
+}
+footer div{
+  display: flex;
+  width:10rem;
+  justify-content: space-between;
+}
+footer div div{
+  cursor: pointer;
 }
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
 
+.intro{
+  position:fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width:100%;
+  height: 100vh;
+  background-color: #1c1f26;
+  transition: 1.5s;
+}
+.logoHeader{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%); 
+}
+.introLogo{
+  position: relative;
+  display: inline-block;
+  bottom:-20px;
+  opacity: 0;
+}
+.introLogo.active{
+  bottom:0;
+  opacity: 1;
+  transition: ease-in-out .5s;
+}
+.introLogo.fade{
+  bottom:150px;
+  opacity: 0;
+  transition: ease-in-out .5s;
+} 
 
 /* 
 #2FA12F green
