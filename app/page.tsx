@@ -136,7 +136,7 @@ export default function Home() {
 
             {/* Footer */}
             <footer className="border-t py-8 text-center text-sm text-muted-foreground">
-                <p>© {new Date().getFullYear()} Your Name. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} Muhammad Haris. All rights reserved.</p>
             </footer>
         </main>
     );
