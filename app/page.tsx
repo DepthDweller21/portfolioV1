@@ -51,7 +51,7 @@ const glowConfigs: GlowConfig[] = [
         sizeMax: 70,
         transparency: 0.01,
         frequency: 0.4,
-    }
+    },
 ];
 
 type ActiveGlow = {
@@ -63,9 +63,11 @@ type ActiveGlow = {
 
 export default function Home() {
     const [activeGlows, setActiveGlows] = useState<ActiveGlow[]>([]);
-    const [primaryColor, setPrimaryColor] = useState<string>("");
+    const [primaryColor, setPrimaryColor] = useState<string>("oklch(0.205 0 0)");
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         // Get the computed primary color from CSS variable
         if (typeof window !== "undefined") {
             const root = document.documentElement;
@@ -76,6 +78,8 @@ export default function Home() {
     }, []);
 
     useEffect(() => {
+        if (!mounted) return;
+
         const checkInterval = 200; // Check every 200ms
         const interval = setInterval(() => {
             setActiveGlows((prev) => {
@@ -110,7 +114,7 @@ export default function Home() {
         }, checkInterval);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [mounted]);
 
     const getColorStyle = (color: string, transparency: number) => {
         if (color === "primary") {
@@ -145,6 +149,24 @@ export default function Home() {
             opacity: transparency,
         };
     };
+
+    const projects = [
+        {
+            title: "Kayden ERP",
+            description: "A ERP system for a B2B Pool liner and Pool Cover company that deals with over 200+ companies, with a custom 2D spline based pool builder",
+            technologies: ["php", "mysql", "javascript", "html", "css","aws","linux","ajax","jquery", "bootstrap", "github actions", "linux", "self hosted"],
+        },
+        {
+            title: "Scanzilla",
+            description: "A tool for scanning and checking the validity of titles, bulletpoints, descriptions and keywords of amazon products, in order to allow users to save time and costs on amazon's product validation service",
+            technologies: ["openai","nodejs", "mongodb", "javascript", "react","aws","linux","websockets", "bootstrap", "github actions", "linux", "self hosted"],
+        },
+        {
+            title: "servicehub",
+            description: "a tool for healthcare brokers to efficiently manage their doctors, and hospitals",
+            technologies: ["docker", "vue", "redis", "mysql", "tailwindCSS", "typescript", "nodejs", "nestjs", "api", "github actions", "linux", "self hosted", "jest", "swagger"],
+        }
+    ];
 
     return (
         <main className="min-h-screen">
@@ -221,8 +243,8 @@ export default function Home() {
                             <User className="mb-4 size-12 text-primary" />
                             <h3 className="mb-4 text-2xl font-semibold">Who I Am</h3>
                             <p className="mb-4 text-muted-foreground">
-                            I'm a developer who believes in building things that last. I care less about trends and more about quality, structure, and reliability.
-                            I'm most at home deep in code, optimizing systems, or tinkering with Linux until everything just works the way it should.
+                                I'm a developer who believes in building things that last. I care less about trends and more about quality, structure, and reliability. I'm most at home deep in code, optimizing systems, or tinkering with
+                                Linux until everything just works the way it should.
                             </p>
                             <p className="text-muted-foreground">When I'm not coding, you can find me exploring new technologies, contributing to open source, or sharing knowledge with the developer community.</p>
                         </div>
@@ -230,11 +252,10 @@ export default function Home() {
                             <Briefcase className="mb-4 size-12 text-primary" />
                             <h3 className="mb-4 text-2xl font-semibold">What I Do</h3>
                             <p className="mb-4 text-muted-foreground">
-                                I design and develop full-stack systems — from backend APIs and automation scripts to frontend interfaces and deployment pipelines. My work often bridges software and infrastructure: Node.js and PHP on the backend; with Docker, AWS, and Linux powering the stack underneath.
+                                I design and develop full-stack systems — from backend APIs and automation scripts to frontend interfaces and deployment pipelines. My work often bridges software and infrastructure: Node.js and PHP on the
+                                backend; with Docker, AWS, and Linux powering the stack underneath.
                             </p>
-                            <p className="text-muted-foreground">
-                                Whether it's building something from scratch or making existing systems more efficient, I focus on function, maintainability, and simplicity above all.
-                            </p>
+                            <p className="text-muted-foreground">Whether it's building something from scratch or making existing systems more efficient, I focus on function, maintainability, and simplicity above all.</p>
                         </div>
                     </div>
                 </div>
@@ -280,19 +301,11 @@ export default function Home() {
                         <div className="mx-auto h-1 w-24 bg-primary"></div>
                     </div>
                     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                        {[1, 2, 3].map((project) => (
-                            <div key={project} className="group rounded-lg border bg-card p-6 shadow-sm transition-all hover:shadow-lg">
+                        {projects.map((project, i) => (
+                            <div key={i} className="group rounded-lg border bg-card p-6 shadow-sm transition-all hover:shadow-lg">
                                 <div className="mb-4 aspect-video rounded-md bg-muted"></div>
-                                <h3 className="mb-2 text-xl font-semibold">Project {project}</h3>
-                                <p className="mb-4 text-sm text-muted-foreground">A brief description of the project and what technologies were used. This showcases your work and expertise.</p>
-                                <div className="flex gap-2">
-                                    <Button size="sm" variant="outline">
-                                        View Project
-                                    </Button>
-                                    <Button size="sm" variant="ghost">
-                                        <Github className="size-4" />
-                                    </Button>
-                                </div>
+                                <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
+                                <p className="mb-4 text-sm text-muted-foreground">{project.description}</p>
                             </div>
                         ))}
                     </div>
@@ -330,7 +343,7 @@ export default function Home() {
 
             {/* Footer */}
             <footer className="border-t py-8 text-center text-sm text-muted-foreground">
-                <p>© {new Date().getFullYear()} Muhammad Haris. All rights reserved.</p>
+                <p>© {mounted ? new Date().getFullYear() : 2024} Muhammad Haris. All rights reserved.</p>
             </footer>
         </main>
     );
